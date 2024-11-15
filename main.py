@@ -9,3 +9,6 @@ if __name__ == '__main__':
     print_hi('PyCharm')
 
 print("nah")
+x=5
+y=10
+print(x+y)
