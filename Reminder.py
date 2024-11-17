@@ -24,23 +24,24 @@ def set():
             print(t)
             text = sd.askstring("Напоминание", "Введите текст напоминания.")
             label.config(text=f"В {hour:02}:{minute:02} {text} ")
-            check()
+            check(msgtext=text)
         except Exception as e:
             mb.showerror("Ошибка.", f"Произошла ошибка {e}")
 
 
-def check():
-    print( "check:" )
+def check(msgtext):
+    print("check:")
     global t
     if t:
         now = time.time()
         if now >= t:
             play_snd()
             t = 0
+            mb.showinfo( "Внимание!", f"Необходимо {msgtext}" )
             print( "finish>>>" )
         else:
             print("after>>>")
-            window.after(10000, check)
+            window.after(10000, lambda: check(msgtext))
 
 
 def play_snd():
@@ -50,6 +51,7 @@ def play_snd():
     pygame.mixer.music.load("raz.mp3")
     print("playing...")
     pygame.mixer.music.play()
+
 
 
 def stop_music():
